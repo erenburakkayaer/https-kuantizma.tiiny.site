@@ -1,9 +1,9 @@
 :root {
     --bg-dark: #050505;
     --card-bg: rgba(255, 255, 255, 0.03);
-    --accent: #00f2ff;
+    --accent: #b0fbff;
     --text-main: #ffffff;
-    --text-dim: #b0b0b0;
+    --text-dim: white;
     --nav-bg: rgba(5, 5, 5, 0.8);
 }
 
@@ -156,7 +156,7 @@ body {
 }
 
 .card-icon {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 15px;
 }
 
@@ -302,7 +302,7 @@ footer {
 .modal-title {
     font-family: 'Orbitron', sans-serif;
     color: var(--accent);
-    font-size: 1.5rem;
+    font-size: zrem;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0, 242, 255, 0.15);
