@@ -532,16 +532,68 @@ footer {
     margin-bottom: 16px;
 }
 
-@media (max-width: 768px) {
+/* ========== RESPONSIVE / MOBILE ========== */
+
+/* Tablet */
+@media (max-width: 900px) {
+    .section {
+        padding: 80px 5%;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        padding: 28px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+
+    /* --- Login Card --- */
+    html:not(.logged-in) body {
+        padding: 20px 16px;
+        align-items: flex-start;
+    }
+
+    .kart {
+        width: 100%;
+        max-width: 100%;
+        padding: 28px 20px;
+        border-radius: 16px;
+        margin: auto 0;
+    }
+
+    .kart h1 {
+        font-size: 22px;
+    }
+
+    .kart input {
+        font-size: 16px; /* prevents iOS zoom */
+    }
+
+    .kart button {
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    /* --- Navbar --- */
     .navbar {
-        padding: 10px 5%;
+        padding: 12px 5%;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1.1rem;
     }
 
     .nav-links {
         display: flex;
-        gap: 12px;
+        gap: 8px;
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -551,16 +603,111 @@ footer {
     }
 
     .nav-links a {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* --- Hero --- */
+    .hero {
+        padding: 0 20px;
+        text-align: center;
     }
 
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: clamp(1.8rem, 10vw, 2.8rem);
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .cta-btn {
+        padding: 10px 25px;
+        font-size: 0.85rem;
+    }
+
+    /* --- Sections --- */
+    .section {
+        padding: 60px 5%;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        margin-bottom: 40px;
+    }
+
+    /* --- Cards Grid --- */
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 24px 20px;
+    }
+
+    .card h3 {
+        font-size: 0.95rem;
+    }
+
+    /* --- Topics --- */
+    .topics-list li {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+    }
+
+    .topics-list li:hover {
+        padding-left: 28px;
+    }
+
+    /* --- Contact --- */
+    .contact-box {
+        padding: 30px 20px;
+    }
+
+    .contact-email {
+        font-size: 0.9rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+        padding: 40px 20px;
+        font-size: 0.8rem;
+    }
+
+    /* --- Modal --- */
+    .modal-overlay {
+        padding: 12px;
     }
 
     .modal-box {
-        padding: 30px 20px;
-        width: 95%;
+        padding: 24px 16px;
+        width: 100%;
+        border-radius: 16px;
+        max-height: 90vh;
+    }
+
+    .modal-title {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        padding-bottom: 14px;
+    }
+
+    .modal-body p {
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .nav-links a {
+        font-size: 0.65rem;
+    }
+
+    .kart h1 {
+        font-size: 20px;
     }
 }
 
@@ -579,4 +726,5 @@ footer {
     border-color: #ff5e5e;
     box-shadow: 0 0 15px rgba(255, 94, 94, 0.4);
 }
+
 
