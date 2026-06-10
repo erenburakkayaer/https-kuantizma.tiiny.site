@@ -311,6 +311,32 @@
         if (e.key === 'Escape') closeModal();
     });
 
+    // --- Safe Storage Wrapper for Local file:// Protocol ---
+    const safeStorage = {
+      getItem: (key) => {
+        try {
+          return sessionStorage.getItem(key);
+        } catch (e) {
+          return safeStorage._data[key] || null;
+        }
+      },
+      setItem: (key, value) => {
+        try {
+          sessionStorage.setItem(key, value);
+        } catch (e) {
+          safeStorage._data[key] = value;
+        }
+      },
+      removeItem: (key) => {
+        try {
+          sessionStorage.removeItem(key);
+        } catch (e) {
+          delete safeStorage._data[key];
+        }
+      },
+      _data: {}
+    };
+
     // --- Authentication & Session Logic ---
     document.addEventListener('DOMContentLoaded', () => {
       const loginContainer = document.getElementById('login-container');
@@ -319,7 +345,7 @@
       const errorMsg = document.getElementById('errorMsg');
 
       // Check current login state
-      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+      if (safeStorage.getItem('isLoggedIn') === 'true') {
         loginContainer.style.display = 'none';
         mainContent.style.display = 'block';
         document.body.classList.add('logged-in');
@@ -336,8 +362,8 @@
           const validPassword = 'kuantizma123';
 
           if (email === validEmail && password === validPassword) {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('userEmail', email);
+            safeStorage.setItem('isLoggedIn', 'true');
+            safeStorage.setItem('userEmail', email);
 
             // Transition UI
             loginContainer.style.display = 'none';
@@ -359,8 +385,8 @@
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          sessionStorage.removeItem('isLoggedIn');
-          sessionStorage.removeItem('userEmail');
+          safeStorage.removeItem('isLoggedIn');
+          safeStorage.removeItem('userEmail');
 
           // Transition UI back to login
           loginContainer.style.display = 'flex';
