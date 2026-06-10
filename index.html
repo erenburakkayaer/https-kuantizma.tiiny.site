@@ -366,10 +366,7 @@ document.addEventListener('keydown', function(e) {
           const email = document.getElementById('email').value.trim();
           const password = document.getElementById('sifre').value.trim();
 
-          const validEmail = 'admin@kuantizma.com';
-          const validPassword = 'kuantizma123';
-
-          if (email === validEmail && password === validPassword) {
+          if (email !== '' && password !== '') {
             safeStorage.setItem('isLoggedIn', 'true');
             safeStorage.setItem('userEmail', email);
 
