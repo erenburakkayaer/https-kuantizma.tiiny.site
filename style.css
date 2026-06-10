@@ -713,18 +713,17 @@ footer {
 
 /* Custom Logout Link */
 .logout-btn-container a {
-    color: #ff5e5e;
-    border: 1px solid rgba(255, 94, 94, 0.3);
-    padding: 6px 14px;
-    border-radius: 8px;
-    text-shadow: none;
+    color: var(--text-dim) !important;
+    opacity: 0.6;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
 }
 
 .logout-btn-container a:hover {
-    color: #fff !important;
-    background: #ff5e5e;
-    border-color: #ff5e5e;
-    box-shadow: 0 0 15px rgba(255, 94, 94, 0.4);
+    color: #ff7070 !important;
+    opacity: 1;
 }
 
 
