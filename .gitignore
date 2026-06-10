@@ -1,2 +1,6 @@
 kuantizma_deploy.zip
 .DS_Store
+*.zip
+*.py
+*.cjs
+check_js.*
