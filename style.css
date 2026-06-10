@@ -215,16 +215,33 @@ html:not(.logged-in) body::after {
 }
 
 
-/* --- Main Site Styles (when logged in) --- */
-html.logged-in body {
+
+/* --- Main Site Styles --- */
+:root {
+    --bg-dark: #050505;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --accent: #00f2ff;
+    --text-main: #ffffff;
+    --text-dim: #b0b0b0;
+    --nav-bg: rgba(5, 5, 5, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    display: block;
-    width: auto;
-    height: auto;
 }
 
 .navbar {
@@ -252,7 +269,6 @@ html.logged-in body {
 .nav-links {
     display: flex;
     list-style: none;
-    align-items: center;
 }
 
 .nav-links li {
@@ -270,22 +286,6 @@ html.logged-in body {
 
 .nav-links a:hover {
     color: var(--accent);
-}
-
-/* Custom Logout Link */
-.logout-btn-container a {
-    color: #ff5e5e;
-    border: 1px solid rgba(255, 94, 94, 0.3);
-    padding: 6px 14px;
-    border-radius: 8px;
-    text-shadow: none;
-}
-
-.logout-btn-container a:hover {
-    color: #fff !important;
-    background: #ff5e5e;
-    border-color: #ff5e5e;
-    box-shadow: 0 0 15px rgba(255, 94, 94, 0.4);
 }
 
 .hero {
@@ -375,7 +375,7 @@ html.logged-in body {
 }
 
 .card-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 15px;
 }
 
@@ -521,7 +521,7 @@ footer {
 .modal-title {
     font-family: 'Orbitron', sans-serif;
     color: var(--accent);
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0, 242, 255, 0.15);
@@ -565,3 +565,20 @@ footer {
         width: 95%;
     }
 }
+
+/* Custom Logout Link */
+.logout-btn-container a {
+    color: #ff5e5e;
+    border: 1px solid rgba(255, 94, 94, 0.3);
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-shadow: none;
+}
+
+.logout-btn-container a:hover {
+    color: #fff !important;
+    background: #ff5e5e;
+    border-color: #ff5e5e;
+    box-shadow: 0 0 15px rgba(255, 94, 94, 0.4);
+}
+
