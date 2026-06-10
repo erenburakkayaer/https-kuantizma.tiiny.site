@@ -366,20 +366,14 @@ document.addEventListener('keydown', function(e) {
           const email = document.getElementById('email').value.trim();
           const password = document.getElementById('sifre').value.trim();
 
-          if (email !== '' && password !== '') {
-            safeStorage.setItem('isLoggedIn', 'true');
-            safeStorage.setItem('userEmail', email);
+          // Form automatically validates required fields natively.
+          // ALWAYS log the user in immediately.
+          safeStorage.setItem('isLoggedIn', 'true');
+          safeStorage.setItem('userEmail', email);
 
-            // Transition UI via class
-            document.documentElement.className = 'logged-in';
-            errorMsg.style.display = 'none';
-          } else {
-            errorMsg.style.display = 'block';
-            // Simple shake animation trigger
-            errorMsg.style.animation = 'none';
-            void errorMsg.offsetWidth;
-            errorMsg.style.animation = 'shake 0.4s ease-in-out';
-          }
+          // Transition UI via class
+          document.documentElement.className = 'logged-in';
+          errorMsg.style.display = 'none';
         });
       }
 
