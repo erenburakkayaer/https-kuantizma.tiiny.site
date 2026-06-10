@@ -23,8 +23,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* --- Scoped UI displays to prevent visual flash --- */
+html.logged-in #login-container {
+  display: none !important;
+}
+html.logged-in #main-content {
+  display: block !important;
+}
+html:not(.logged-in) #login-container {
+  display: flex !important;
+}
+html:not(.logged-in) #main-content {
+  display: none !important;
+}
+
 /* --- Login Page Styles (when NOT logged in) --- */
-body:not(.logged-in) {
+html:not(.logged-in) body {
   width: 100%;
   height: 100%;
   font-family: 'Outfit', sans-serif;
@@ -36,7 +50,7 @@ body:not(.logged-in) {
   overflow: hidden;
 }
 
-body:not(.logged-in)::before, body:not(.logged-in)::after {
+html:not(.logged-in) body::before, html:not(.logged-in) body::after {
   content: '';
   position: fixed;
   width: 300px;
@@ -48,14 +62,14 @@ body:not(.logged-in)::before, body:not(.logged-in)::after {
   pointer-events: none;
 }
 
-body:not(.logged-in)::before {
+html:not(.logged-in) body::before {
   background: #4f7ef8;
   top: 10%;
   left: 10%;
   animation: float-purple 8s infinite alternate ease-in-out;
 }
 
-body:not(.logged-in)::after {
+html:not(.logged-in) body::after {
   background: #d63384;
   bottom: 10%;
   right: 10%;
@@ -202,7 +216,7 @@ body:not(.logged-in)::after {
 
 
 /* --- Main Site Styles (when logged in) --- */
-body.logged-in {
+html.logged-in body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;

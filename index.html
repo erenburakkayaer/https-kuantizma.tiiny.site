@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kuantizma | Kuantum ve Atom Altı Fiziği</title>
+  <script>
+    // Prevent Flash of Unstyled Content (FOUC) by checking auth state immediately
+    try {
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        document.documentElement.className = 'logged-in';
+      }
+    } catch (e) {
+      // Fallback for local file:/// context
+      try {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+          document.documentElement.className = 'logged-in';
+        }
+      } catch (err) {}
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -339,16 +354,12 @@
 
     // --- Authentication & Session Logic ---
     document.addEventListener('DOMContentLoaded', () => {
-      const loginContainer = document.getElementById('login-container');
-      const mainContent = document.getElementById('main-content');
       const loginForm = document.getElementById('loginForm');
       const errorMsg = document.getElementById('errorMsg');
 
-      // Check current login state
+      // Sync documentElement class in case storage fallback was triggered on load
       if (safeStorage.getItem('isLoggedIn') === 'true') {
-        loginContainer.style.display = 'none';
-        mainContent.style.display = 'block';
-        document.body.classList.add('logged-in');
+        document.documentElement.className = 'logged-in';
       }
 
       // Login form submission
@@ -365,10 +376,8 @@
             safeStorage.setItem('isLoggedIn', 'true');
             safeStorage.setItem('userEmail', email);
 
-            // Transition UI
-            loginContainer.style.display = 'none';
-            mainContent.style.display = 'block';
-            document.body.classList.add('logged-in');
+            // Transition UI via class
+            document.documentElement.className = 'logged-in';
             errorMsg.style.display = 'none';
           } else {
             errorMsg.style.display = 'block';
@@ -388,10 +397,8 @@
           safeStorage.removeItem('isLoggedIn');
           safeStorage.removeItem('userEmail');
 
-          // Transition UI back to login
-          loginContainer.style.display = 'flex';
-          mainContent.style.display = 'none';
-          document.body.classList.remove('logged-in');
+          // Transition UI back to login via class
+          document.documentElement.className = '';
         });
       }
     });
