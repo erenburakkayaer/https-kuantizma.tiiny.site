@@ -5,19 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kuantizma | Evrenin Gizemini Keşfet</title>
   <script>
-    // Prevent Flash of Unstyled Content (FOUC) by checking auth state immediately
     try {
-      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+      if (sessionStorage.getItem('ku_loggedin') === '1') {
         document.documentElement.className = 'logged-in';
       }
-    } catch (e) {
-      // Fallback for local file:/// context
-      try {
-        if (localStorage.getItem('isLoggedIn') === 'true') {
-          document.documentElement.className = 'logged-in';
-        }
-      } catch (err) {}
-    }
+    } catch(e) {}
   </script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -31,7 +23,7 @@
 
       <div class="error-msg" id="errorMsg" style="display: none;">E-posta veya şifre hatalı!</div>
 
-      <form id="loginForm">
+      <form id="loginForm" onsubmit="return kuGirisYap()">
         <div class="form-group">
           <label for="email">E-posta</label>
           <input type="email" id="email" name="email" placeholder="ornek@mail.com" required>
@@ -58,7 +50,7 @@
         <li><a href="#about">Kuantum Nedir?</a></li>
         <li><a href="#topics">Konular</a></li>
         <li><a href="#contact">İletişim</a></li>
-        <li class="logout-btn-container"><a href="#" id="logoutBtn">Çıkış Yap</a></li>
+        <li class="logout-btn-container"><a href="#" onclick="kuCikisYap(); return false;">Çıkış Yap</a></li>
     </ul>
 </nav>
 
@@ -323,73 +315,18 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
 });
 
-    // --- Safe Storage Wrapper for Local file:// Protocol ---
-    const safeStorage = {
-      getItem: (key) => {
-        try {
-          return sessionStorage.getItem(key);
-        } catch (e) {
-          return safeStorage._data[key] || null;
-        }
-      },
-      setItem: (key, value) => {
-        try {
-          sessionStorage.setItem(key, value);
-        } catch (e) {
-          safeStorage._data[key] = value;
-        }
-      },
-      removeItem: (key) => {
-        try {
-          sessionStorage.removeItem(key);
-        } catch (e) {
-          delete safeStorage._data[key];
-        }
-      },
-      _data: {}
-    };
+    // --- Login ---
+    function kuGirisYap() {
+      try { sessionStorage.setItem('ku_loggedin', '1'); } catch(e) {}
+      document.documentElement.className = 'logged-in';
+      return false;
+    }
 
-    // --- Authentication & Session Logic ---
-    document.addEventListener('DOMContentLoaded', () => {
-      const loginForm = document.getElementById('loginForm');
-      const errorMsg = document.getElementById('errorMsg');
-
-      // Sync documentElement class in case storage fallback was triggered on load
-      if (safeStorage.getItem('isLoggedIn') === 'true') {
-        document.documentElement.className = 'logged-in';
-      }
-
-      // Login form submission
-      if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const email = document.getElementById('email').value.trim();
-          const password = document.getElementById('sifre').value.trim();
-
-          // Form automatically validates required fields natively.
-          // ALWAYS log the user in immediately.
-          safeStorage.setItem('isLoggedIn', 'true');
-          safeStorage.setItem('userEmail', email);
-
-          // Transition UI via class
-          document.documentElement.className = 'logged-in';
-          errorMsg.style.display = 'none';
-        });
-      }
-
-      // Logout button binding
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          safeStorage.removeItem('isLoggedIn');
-          safeStorage.removeItem('userEmail');
-
-          // Transition UI back to login via class
-          document.documentElement.className = '';
-        });
-      }
-    });
+    // --- Logout ---
+    function kuCikisYap() {
+      try { sessionStorage.removeItem('ku_loggedin'); } catch(e) {}
+      document.documentElement.className = '';
+    }
   </script>
 </body>
 </html>
