@@ -1,1 +1,1 @@
-# https://kuantizma.tiiny.site
+# https://kuantizmaa.tiiny.site
